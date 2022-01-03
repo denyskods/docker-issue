@@ -1,13 +1,19 @@
-node {
-  stage 'Checkout'
-  git url: 'https://github.com/prostraciya/docker-issue.git'
+pipeline {
 
-  stage 'build'
- sh '''
- docker-compose build
-'''
+   agent any
 
- stage 'deploy'
- sh '''
- docker-compose up
- '''
+   stages {
+       stage('docker-compose') {
+           steps {
+              sh "docker-compose build"
+              sh "docker-compose up -d"
+              ...
+           }
+       }
+   }
+   post {
+      always {
+         sh "docker-compose down || true"
+      }
+   }   
+}
