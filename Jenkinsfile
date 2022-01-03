@@ -11,18 +11,3 @@ node {
  sh '''
  docker-compose up
  '''
-
-
-
-
-
-
-
-
-
-
-
-
-  stage 'deploy'
-  docker-compose up
-}
