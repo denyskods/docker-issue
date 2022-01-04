@@ -20,7 +20,7 @@ pipeline {
 	      docker image rm -f $(docker image ls -q)
 	      docker-compose build
 	      docker login -u "$HUB_USR" -p "$HUB_KEY"
-              docker push denisko/docker-issue:latest
+              docker-compose push denisko/docker-issue:latest
 	      '''
            }
        }
