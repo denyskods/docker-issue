@@ -11,9 +11,11 @@ pipeline {
       } 	
 	stage('docker-compose build') {
            steps {
-              sh "docker system prune -f"
-	      sh "docker image rm -f $(docker image ls -q)"
-	      sh "docker-compose build"
+              sh ''' 
+              docker system prune -f
+	      docker image rm -f $(docker image ls -q)
+	      docker-compose build
+	      '''
            }
        }
         stage('docker-compose deploy') {
