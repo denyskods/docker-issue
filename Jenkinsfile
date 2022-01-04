@@ -12,6 +12,7 @@ pipeline {
 	stage('docker-compose build') {
            steps {
               sh ''' 
+	      docker-compose down
               docker pull hello-world
 	      docker system prune -f
 	      docker image rm -f $(docker image ls -q)
