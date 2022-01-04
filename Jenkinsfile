@@ -11,14 +11,12 @@ pipeline {
       } 	
 	stage('docker-compose build') {
            steps {
-<<<<<<< HEAD
              script {
                     withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'HUB_KEY', usernameVariable: 'HUB_USR')])
 	      sh ''' 
 =======
               sh ''' 
 	      docker-compose down
->>>>>>> 5e0fdaed52373e436b825dbdfbf9b76c82c35eb8
               docker pull hello-world
 	      docker system prune -f
 	      docker image rm -f $(docker image ls -q)
