@@ -13,8 +13,6 @@ pipeline {
            steps {
              script {
                     withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'HUB_KEY', usernameVariable: 'HUB_USR')])
-	      sh ''' 
-=======
               sh ''' 
 	      docker-compose down
               docker pull hello-world
