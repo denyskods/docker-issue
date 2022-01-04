@@ -11,7 +11,9 @@ pipeline {
       } 	
 	stage('docker-compose build') {
            steps {
-              sh "docker-compose build"
+              sh "docker system prune -f"
+	      sh "docker image rm -f $(docker image ls -q)"
+	      sh "docker-compose build"
            }
        }
         stage('docker-compose deploy') {
@@ -26,9 +28,9 @@ pipeline {
        }
 
    }
-   post {
-      always {
-         sh "docker-compose down || true"
-      }
-   }   
+//   post {
+//      always {
+//        sh "docker-compose down || true"
+//      }
+//   }   
 }
