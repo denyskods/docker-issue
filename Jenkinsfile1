@@ -16,6 +16,7 @@ pipeline {
               sh ''' 
               docker pull hello-world
 	      docker system prune -f
+	      docker rm -vf $(docker ps -aq)
 	      docker image rm -f $(docker image ls -q)
 	      docker-compose build
 	      '''
