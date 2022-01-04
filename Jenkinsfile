@@ -11,11 +11,15 @@ pipeline {
       } 	
 	stage('docker-compose build') {
            steps {
-              sh ''' 
+             script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'HUB_KEY', usernameVariable: 'HUB_USR')])
+	      sh ''' 
               docker pull hello-world
 	      docker system prune -f
 	      docker image rm -f $(docker image ls -q)
 	      docker-compose build
+	      docker login -u "$HUB_USR" -p "$HUB_KEY"
+              docker push denisko/docker-issue:latest
 	      '''
            }
        }
@@ -29,11 +33,15 @@ pipeline {
               sh "docker-compose ps"
            }
        }
+        stage('docker-push') {
+           steps {
+              sh  '''
+	      docker-compose ps
+	      	
+	      '''	
+           }
+       }
+
 
    }
-//   post {
-//      always {
-//        sh "docker-compose down || true"
-//      }
-//   }   
 }

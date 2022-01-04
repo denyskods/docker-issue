@@ -7,6 +7,7 @@ services:
     ports:
       - 8081:80
     restart: always
+    image: denisko/docker-issue
   backend1:
     build: backend1
     container_name: backend1
@@ -15,6 +16,8 @@ services:
     ports:
       - 5001:5001
     restart: always
+    image: denisko/docker-issue
+
   backend2:
     build: backend2
     container_name: backend2
@@ -23,6 +26,8 @@ services:
     ports:
       - 5002:5002
     restart: always
+    image: denisko/docker-issue
+
   backend3:
     build: backend3
     container_name: backend3
@@ -31,3 +36,5 @@ services:
     ports:
       - 5003:5003
     restart: always
+    image: denisko/docker-issue
+
