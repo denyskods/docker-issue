@@ -1,11 +1,5 @@
 pipeline {
-<<<<<<< HEAD
-    agent { label 'docker' }
-=======
-
    agent { label 'docker' }
->>>>>>> bb92e17bed118ed7c255c73e30d1cd0db5780a95
-
    stages {
 	stage('Tooling version') {
 	   steps {
