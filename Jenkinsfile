@@ -1,6 +1,6 @@
 pipeline {
 
-   agent 'docker'
+   agent { label 'docker' }
 
    stages {
 	stage('Tooling version') {
