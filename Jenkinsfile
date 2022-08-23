@@ -18,13 +18,14 @@ pipeline {
              script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub_cred_denisko', passwordVariable: 'HUB_KEY', usernameVariable: 'HUB_USR')]) {
               sh ''' 
-	      docker-compose down
-              docker pull hello-world
+	      docker-compose stop
+         docker-compose down
+         docker pull hello-world
 	      docker system prune -f
 	      docker image rm -f $(docker image ls -q)
 	      docker-compose build
 	      docker login -u "$HUB_USR" -p "$HUB_KEY"
-	            docker-compose push
+	      docker-compose push
 	      '''
            }
        }
