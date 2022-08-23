@@ -1,5 +1,6 @@
 pipeline {
-    agent { label 'docker' }
+
+   agent any
 
    stages {
 	stage('Tooling version') {
@@ -7,17 +8,11 @@ pipeline {
 	      sh "docker --version" 
 	      sh "docker-compose version"
 	   }
-      } 
-	stage('Checkout') {
-            steps{
-                git branch: 'main',
-                    url: 'https://github.com/denyskods/docker-issue.git'        
-                }
-            }
+      } 	
 	stage('docker-compose build') {
            steps {
              script {
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub_cred_denisko', passwordVariable: 'HUB_KEY', usernameVariable: 'HUB_USR')]) {
+                    withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'HUB_KEY', usernameVariable: 'HUB_USR')]) {
               sh ''' 
 	      docker-compose down
               docker pull hello-world
@@ -25,7 +20,7 @@ pipeline {
 	      docker image rm -f $(docker image ls -q)
 	      docker-compose build
 	      docker login -u "$HUB_USR" -p "$HUB_KEY"
-	            docker-compose push
+              docker-compose push
 	      '''
            }
        }
@@ -44,7 +39,7 @@ pipeline {
         stage('docker-push') {
            steps {
               sh  '''
-           docker-compose ps
+	      docker-compose ps
 	      '''	
            }
        }
