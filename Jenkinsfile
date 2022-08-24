@@ -51,7 +51,7 @@ pipeline {
         stage('telegram push') {
            steps {
          
-           telegramSend 'Hello World'
+           telegramSend(message: 'Hello World', chatId: -601935342)
 	      	
            }
        }
