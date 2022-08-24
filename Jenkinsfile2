@@ -1,6 +1,5 @@
-git pipeline {
+pipeline {
    agent { label 'docker' }
-   
    stages {
 	stage('Tooling version') {
 	    steps {
