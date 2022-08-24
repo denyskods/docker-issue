@@ -51,7 +51,7 @@ pipeline {
         stage('telegram push') {
            steps {
          
-           telegramSend(message: "${BUILD_TAG} ${BUILD_URL}  ${NODE_NAME} ${GIT_URL}", chatId: -601935342)
+           telegramSend(message: "${BUILD_TAG} ${BUILD_URL} ${NODE_NAME} ${GIT_URL}", chatId: -601935342)
 	      	
            }
        }
