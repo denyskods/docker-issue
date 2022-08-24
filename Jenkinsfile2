@@ -1,0 +1,22 @@
+pipeline {
+   agent { label 'docker' }
+   stages {
+	stage('Tooling version') {
+	    steps {
+	      sh "docker --version" 
+	      sh "docker-compose version"
+	            }
+       } 
+	stage('Checkout') {
+        steps {
+            git branch: 'test',
+                url: 'https://github.com/denyskods/docker-issue.git'        
+                }
+        }
+    stage('telegram push') {
+        steps {
+            telegramSend(message: "test message", chatId: -601935342)
+	      	    }
+       }
+   }
+}
