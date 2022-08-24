@@ -48,6 +48,13 @@ pipeline {
 	      '''	
            }
        }
+        stage('telegram push') {
+           steps {
+         
+           telegramSend 'Hello World'
+	      	
+           }
+       }
 
 
    }
