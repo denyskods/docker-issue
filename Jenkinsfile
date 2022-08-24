@@ -51,7 +51,7 @@ pipeline {
         stage('telegram push') {
            steps {
          
-           telegramSend(message: 'Hello World', chatId: -601935342)
+           telegramSend(message: "${JOB_DISPLAY_URL} ${JOB_NAME} ${GIT_COMMIT}", chatId: -601935342)
 	      	
            }
        }
